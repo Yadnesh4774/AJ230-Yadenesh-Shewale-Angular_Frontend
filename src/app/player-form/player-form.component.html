@@ -1,0 +1,64 @@
+<div class="container mt-5">
+    <h2>{{ isEditMode ? 'Edit Player' : 'Add Player' }}</h2>
+    <form [formGroup]="playerForm" (ngSubmit)="savePlayer()">
+      
+      <div class="mb-3">
+        <label for="playerName" class="form-label">Player Name <span class="text-danger">*</span></label>
+        <input id="playerName" class="form-control" formControlName="playerName" />
+        <div class="text-danger" *ngIf="playerForm.get('playerName')?.touched && playerForm.get('playerName')?.invalid">
+          <small *ngIf="playerForm.get('playerName')?.hasError('required')">Player Name is mandatory.</small>
+          <small *ngIf="playerForm.get('playerName')?.hasError('pattern')">Player Name must begin with an uppercase letter and support multi-word names.</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="jerseyNumber" class="form-label">Jersey Number <span class="text-danger">*</span></label>
+        <input id="jerseyNumber" class="form-control" formControlName="jerseyNumber" />
+        <div class="text-danger" *ngIf="playerForm.get('jerseyNumber')?.touched && playerForm.get('jerseyNumber')?.invalid">
+          <small *ngIf="playerForm.get('jerseyNumber')?.hasError('required')">Jersey Number is mandatory.</small>
+          <small *ngIf="playerForm.get('jerseyNumber')?.hasError('pattern')">Jersey Number must be a number.</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+        <input id="role" class="form-control" formControlName="role" />
+        <div class="text-danger" *ngIf="playerForm.get('role')?.touched && playerForm.get('role')?.invalid">
+          <small>Role is mandatory.</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="totalMatches" class="form-label">Total Matches <span class="text-danger">*</span></label>
+        <input id="totalMatches" class="form-control" formControlName="totalMatches" />
+        <div class="text-danger" *ngIf="playerForm.get('totalMatches')?.touched && playerForm.get('totalMatches')?.invalid">
+          <small *ngIf="playerForm.get('totalMatches')?.hasError('required')">Total Matches is mandatory.</small>
+          <small *ngIf="playerForm.get('totalMatches')?.hasError('min')">Total Matches must be greater than 0.</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="teamName" class="form-label">Team Name <span class="text-danger">*</span></label>
+        <input id="teamName" class="form-control" formControlName="teamName" />
+        <div class="text-danger" *ngIf="playerForm.get('teamName')?.touched && playerForm.get('teamName')?.invalid">
+          <small>Team Name is mandatory.</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="countryOrStateName" class="form-label">Country/State <span class="text-danger">*</span></label>
+        <input id="countryOrStateName" class="form-control" formControlName="countryOrStateName" />
+        <div class="text-danger" *ngIf="playerForm.get('countryOrStateName')?.touched && playerForm.get('countryOrStateName')?.invalid">
+          <small>Country/State is mandatory.</small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" formControlName="description"></textarea>
+      </div>
+      
+      <button class="btn btn-success" type="submit">{{ isEditMode ? 'Update' : 'Add' }}</button>
+      <button class="btn btn-secondary" type="button" (click)="router.navigate(['/players'])">Cancel</button>
+    </form>
+</div>
